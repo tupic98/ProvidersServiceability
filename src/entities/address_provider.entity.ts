@@ -1,5 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Address } from './address.entity';
+import { Providers } from './providers.entity';
 
 @Entity({
   name: 'address_providers',
@@ -10,7 +11,9 @@ export class AddressProvider {
 
 //  Many to One relations
 
-  // provider: Providers
+  @ManyToOne(type => Providers, providers => providers.address_providers)
+  @JoinColumn()
+  provider: Providers;
 
   @ManyToOne(type => Address, address => address.address_providers)
   @JoinColumn()
